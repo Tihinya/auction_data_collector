@@ -1,13 +1,13 @@
 # TODO List - Auction Data Collector
 
 ## Phase 1: Project Setup and Basic Structure
-- [ ] Initialize basic project structure
-- [ ] Set up Go module and identify core dependencies
-- [ ] Create configuration structure
-  - [ ] Set up config.yaml template
-  - [ ] Implement environment variable handling
-  - [ ] Create configuration loading logic
-- [ ] Set up basic error handling patterns
+- [x] Initialize basic project structure
+- [x] Set up Go module and identify core dependencies
+- [x] Create configuration structure
+  - [x] Set up config.json template
+  - [x] Implement environment variable handling
+  - [x] Create configuration loading logic
+- [x] Set up basic error handling patterns
 
 ## Phase 2: Core Scraping Implementation
 - [ ] Design and implement base scraper interface
