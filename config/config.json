@@ -1,0 +1,15 @@
+{
+    "scraper": {
+      "base_url": "https://www.tehingukeskus.ee/oksjonid-koik",
+      "update_interval": 300
+    },
+    "forest_api": {
+      "base_url": "https://register.metsad.ee/portaal/api/rest",
+      "timeout": 30
+    },
+    "storage": {
+      "spreadsheet_id": "",
+      "worksheet_name": "Auction Data"
+    }
+  }
+  
