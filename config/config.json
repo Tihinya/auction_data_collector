@@ -1,15 +1,16 @@
 {
     "scraper": {
-      "base_url": "https://www.tehingukeskus.ee/oksjonid-koik",
-      "update_interval": 300
+        "user-agent": "Mozilla/5.0",
+        "tehingukeskus_url": "https://www.tehingukeskus.ee/kinnistud",
+        "update_interval": 300
+
     },
     "forest_api": {
-      "base_url": "https://register.metsad.ee/portaal/api/rest",
-      "timeout": 30
+        "base_url": "https://register.metsad.ee/portaal/api/rest",
+        "timeout": 30
     },
     "storage": {
-      "spreadsheet_id": "",
-      "worksheet_name": "Auction Data"
+        "spreadsheet_id": "",
+        "worksheet_name": "Auction Data"
     }
-  }
-  
+}
