@@ -8,8 +8,9 @@ import (
 )
 
 type ScraperConfig struct {
-	BaseURL        string `json:"base_url"`
-	UpdateInterval int    `json:"update_interval"`
+	UserAgent        string `json:"user-agent"`
+	TehingukeskusURL string `json:"tehingukeskus_url"`
+	UpdateInterval   int    `json:"update_interval"`
 }
 
 type ForestAPIConfig struct {
