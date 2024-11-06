@@ -1,0 +1,51 @@
+# Compiled binary
+auction-data-collector
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, build script
+*.test
+*.prof
+
+# Output of the go build command
+*.out
+
+# Dependency directories
+vendor/
+
+# Go workspace file
+go.work
+
+# Environment variables
+.env
+
+# Config files
+config/google_credentials.json
+config/*.yaml
+
+# Logs
+logs/*
+
+# Editor files
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+*/ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+*.swp
+*.swo

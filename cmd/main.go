@@ -3,8 +3,8 @@ package main
 import (
 	"auction-data-collector/internal/config"
 	"auction-data-collector/internal/scrapers"
+	"auction-data-collector/internal/storage"
 	"context"
-	"fmt"
 	"log"
 )
 
@@ -37,5 +37,16 @@ func main() {
 		}
 		allData = append(allData, itemData)
 	}
-	fmt.Println(allData)
+
+	interfaceValues := make([][]interface{}, len(allData))
+
+	for i, row := range allData {
+		interfaceRow := make([]interface{}, len(row))
+		for j, cell := range row {
+			interfaceRow[j] = cell
+		}
+		interfaceValues[i] = interfaceRow
+	}
+
+	storage.WriteToSheet(ctx, "Лист1!A1", interfaceValues)
 }
