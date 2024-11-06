@@ -17,17 +17,17 @@ type AuctionScraper struct {
 }
 
 func (s *AuctionScraper) URLsExtract(url, itemSelector, linkSelector, valueSelector string) ([][]string, error) {
-	headers := map[string]string{"User-Agent": s.UserAgent}
+	headers := make(map[string]string, 1)
+	headers["User-Agent"] = s.UserAgent
 
 	doc, err := utils.FetchHTML(s.Ctx, url, headers, s.TimeInterval)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch HTML from %s: %w", url, err)
 	}
 
-	var dataItems [][]string
+	dataItems := make([][]string, 0, 20)
 
 	doc.Find(itemSelector).Each(func(i int, s *goquery.Selection) {
-
 		link, exists := s.Find(linkSelector).Attr("href")
 		if !exists || strings.TrimSpace(link) == "" {
 			return
@@ -35,8 +35,9 @@ func (s *AuctionScraper) URLsExtract(url, itemSelector, linkSelector, valueSelec
 
 		value := strings.TrimSpace(s.Find(valueSelector).Text())
 
-		var data []string
-		data = append(data, link, value)
+		data := make([]string, 2)
+		data[0] = link
+		data[1] = value
 
 		dataItems = append(dataItems, data)
 	})
