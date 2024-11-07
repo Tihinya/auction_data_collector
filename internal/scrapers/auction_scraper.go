@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"auction-data-collector/internal/processors"
 	"auction-data-collector/internal/utils"
 
 	"github.com/PuerkitoBio/goquery"
@@ -36,8 +37,8 @@ func (s *AuctionScraper) URLsExtract(url, itemSelector, linkSelector, valueSelec
 		value := strings.TrimSpace(s.Find(valueSelector).Text())
 
 		data := make([]string, 2)
-		data[0] = link
-		data[1] = value
+		data[0] = value
+		data[1] = link
 
 		dataItems = append(dataItems, data)
 	})
@@ -51,35 +52,36 @@ func (s *AuctionScraper) URLsExtract(url, itemSelector, linkSelector, valueSelec
 	return dataItems, nil
 }
 
-func (s *AuctionScraper) DataExtract(data []string, itemSelector, labelSelector, valueSelector string) ([]map[string]string, error) {
+func (s *AuctionScraper) DataExtract(data []string, itemSelector, labelSelector, valueSelector string) ([]interface{}, error) {
 	headers := map[string]string{"User-Agent": s.UserAgent}
-	var localItems []map[string]string
+	var localItems []interface{}
+	var cadastralCodes []string
 
-	item := map[string]string{data[0]: data[1]}
-	localItems = append(localItems, item)
-
-	doc, err := utils.FetchHTML(s.Ctx, data[0], headers, s.TimeInterval)
+	doc, err := utils.FetchHTML(s.Ctx, data[1], headers, s.TimeInterval)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch HTML from %s: %w", data[0], err)
 	}
+	localItems = append(localItems, data[0], data[1])
 
 	doc.Find(itemSelector).Each(func(i int, s *goquery.Selection) {
-		lable := strings.TrimSpace(s.Find(labelSelector).Text())
-		if lable == "Lõpeb" {
-			value := strings.TrimSpace(s.Find(valueSelector).Text())
-			item := map[string]string{"Data": value}
-			localItems = append(localItems, item)
-		} else if lable == "Kogupindala" {
-			value := strings.TrimSpace(s.Find(valueSelector).Text())
-			item := map[string]string{"Size": value}
-			localItems = append(localItems, item)
-		} else if lable == "KatastritunnusPindala" {
-			value := strings.TrimSpace(s.Find("span[data-holder='copy-text']").Text())
-			item := map[string]string{"Location": value}
+		label := strings.TrimSpace(s.Find(labelSelector).First().Text())
+		value := strings.TrimSpace(s.Find(valueSelector).First().Text())
+		if item, ok := processors.ProcessAuctionData(label, value); ok {
 			localItems = append(localItems, item)
 		}
 
+		if label == "Katastritunnus" {
+			value := s.Find("span[data-holder='copy-text']").Text()
+			cadastralCodes = append(cadastralCodes, value)
+		}
 	})
+
+	if len(cadastralCodes) > 0 {
+		joinedCodes := strings.Join(cadastralCodes, "; ")
+		localItems = append(localItems, joinedCodes)
+	} else {
+		localItems = append(localItems, "")
+	}
 
 	return localItems, nil
 }
