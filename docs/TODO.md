@@ -10,15 +10,15 @@
 - [x] Set up basic error handling patterns
 
 ## Phase 2: Core Scraping Implementation
-- [ ] Design and implement base scraper interface
-  - [ ] Define common scraping methods
-  - [ ] Set up rate limiting
-  - [ ] Implement retry mechanisms
-- [ ] Implement Tehingukeskus.ee scraper
-  - [ ] Create HTML parsing logic
-  - [ ] Implement auction listing retrieval
-  - [ ] Add auction detail scraping
-  - [ ] Handle pagination
+- [x] Design and implement base scraper interface
+  - [X] Define common scraping methods
+  - [X] Set up rate limiting
+  - [X] Implement retry mechanisms
+- [X] Implement Tehingukeskus.ee scraper
+  - [X] Create HTML parsing logic
+  - [X] Implement auction listing retrieval
+  - [X] Add auction detail scraping
+  - [X] Handle pagination
 - [ ] Develop Forest registry API client
   - [ ] Implement API authentication
   - [ ] Create data fetching methods
@@ -29,14 +29,14 @@
   - [ ] Test error scenarios
 
 ## Phase 3: Data Processing
-- [ ] Define data models and schemas
-  - [ ] Auction data structure
-  - [ ] Forest registry data structure
-  - [ ] Combined data model
-- [ ] Implement data processor
-  - [ ] Add data cleaning functions
-  - [ ] Create transformation logic
-  - [ ] Implement data validation
+- [x] Define data models and schemas
+  - [x] Auction data structure
+  - [x] Forest registry data structure
+  - [x] Combined data model
+- [x] Implement data processor
+  - [x] Add data cleaning functions
+  - [x] Create transformation logic
+  - [x] Implement data validation
 - [ ] Create update service
   - [ ] Implement 5-minute check logic
   - [ ] Add change detection
@@ -47,11 +47,11 @@
   - [ ] Test update detection
 
 ## Phase 4: Storage Integration
-- [ ] Implement Google Sheets integration
-  - [ ] Set up authentication
-  - [ ] Create data writing functions
-  - [ ] Implement batch updates
-  - [ ] Add error handling
+- [X] Implement Google Sheets integration
+  - [X] Set up authentication
+  - [X] Create data writing functions
+  - [X] Implement batch updates
+  - [X] Add error handling
 - [ ] Create storage interfaces
   - [ ] Define data access methods
   - [ ] Implement caching if needed
